@@ -170,12 +170,6 @@ public class DishBigActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
-        try {
-            sendDeactivateJson();
-        } catch (JSONException | RemoteException e) {
-            e.printStackTrace();
-            Log.e(TAG, e.toString());
-        }
         finish();
     }
 
