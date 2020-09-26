@@ -23,15 +23,9 @@ public class ImageLoader {
     private static final String LOG_TAG = "Log_in_ImageLoader";
 
     public ImageLoader() {
-        // Из массива байт в битмапку
-        //Bitmap image = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-        // Из битмапки в массив байт
-        //ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        //image.compress(Bitmap.CompressFormat.JPEG,100,stream);
-
     }
 
-// Режим для загрузки фотографий в постоянную память
+    // Режим для загрузки фотографий в постоянную память
     public boolean load(String filename, byte[] bytes, Context mContext, Mode mode) {
         //Проверка режима
         if (mode == Mode.loadInStorage) {
@@ -79,15 +73,32 @@ public class ImageLoader {
     }
 
 
-
     // Режим для создания imageView
     public ImageView load(String filename, byte[] bytes, Context mContext, ImageView imageView, Mode mode) {
         Log.e(LOG_TAG, "CreatingImageView");
         if (mode == Mode.CreatingImageView) {
-            Bitmap image = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+            Bitmap image = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             imageView.setImageBitmap(image);
         }
         return imageView;
+    }
+
+
+    /*Установка изображения в ImageView
+     * return:
+     * 0 - файл не существует
+     * 1 - картинка успешно установлена
+     * */
+    public int setImageView(String filename, ImageView imageView, Context mContext) {
+        // Получение директории с фотографиями
+        File folder = getAlbumStorageDir(mContext, "Dish_examples");
+        String fullFileName = filename + ".jpeg";
+        File file = new File(folder, fullFileName);
+        if (!file.exists())
+            return 0;
+        Bitmap bmp = BitmapFactory.decodeFile(fullFileName);
+        imageView.setImageBitmap(bmp);
+        return 1;
     }
 
 
