@@ -89,13 +89,14 @@ public class ImageLoader {
      * 0 - файл не существует
      * 1 - картинка успешно установлена
      * */
-    public int setImageView(String filename, ImageView imageView, Context mContext) {
+    public int setImageView(String fileName, ImageView imageView, Context mContext) {
         // Получение директории с фотографиями
         File folder = getAlbumStorageDir(mContext, "Dish_examples");
-        String fullFileName = filename + ".jpeg";
-        File file = new File(folder, fullFileName);
+        fileName = fileName + ".jpeg";
+        File file = new File(folder, fileName);
         if (!file.exists())
             return 0;
+        String fullFileName = file.getAbsolutePath();
         Bitmap bmp = BitmapFactory.decodeFile(fullFileName);
         imageView.setImageBitmap(bmp);
         return 1;
